@@ -37,6 +37,8 @@ namespace Hiten_s_Automation_Exercise.TestScript
             string title = driver.Title;
             StringAssert.IsMatch("Automation Exercise", title);
 
+
+
             //4. Click on 'Signup / Login' button
             WelcomePage wp = new WelcomePage(driver);
             wp.getLoginSignuplink().Click();

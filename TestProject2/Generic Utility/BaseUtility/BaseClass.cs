@@ -1,13 +1,10 @@
-﻿using Hiten_s_Automation_Exercise.GenericUtility.WebDriverUtility;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AventStack.ExtentReports;
+﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using Hiten_s_Automation_Exercise.GenericUtility.WebDriverUtility;
+using NUnit.Framework.Interfaces;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
 
 namespace TestProject2.Generic_Utility.BaseUtility
 {
@@ -30,7 +27,7 @@ namespace TestProject2.Generic_Utility.BaseUtility
             reports.AttachReporter(spark);
             reports.AddSystemInfo("OS", "Win11");
             reports.AddSystemInfo("Browser", "Chrome");
-            test = reports.CreateTest("TestCase1");
+            test = reports.CreateTest(TestContext.CurrentContext.Test.Name);
 
 
             //wu.LaunchBrowser(driver, "chrome");
@@ -42,6 +39,14 @@ namespace TestProject2.Generic_Utility.BaseUtility
         [TearDown]
         public void CloseBrowser()
         {
+            if(TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                test.Log(Status.Fail,TestContext.CurrentContext.Test.Name+ " Failed");
+                ITakesScreenshot ts = (ITakesScreenshot)driver;
+                string value = ts.GetScreenshot().AsBase64EncodedString;
+                test.AddScreenCaptureFromBase64String(value,TestContext.CurrentContext.Test.Name);
+                
+            }else { test.Log(Status.Pass, TestContext.CurrentContext.Test.Name + " Passed"); }
             driver.Dispose();
             reports.Flush();
         }
