@@ -1,0 +1,19 @@
+﻿{
+  "user": [
+    {
+      "username": "admin",
+      "password": "admin"
+    },
+    {
+      "username": "admin",
+      "password": "admin"
+    }
+  ],
+  "settings": [
+    {
+      "browser": "chrome",
+      "url": "http://localhost:8888",
+      "wait": 10
+    }
+  ]
+}
