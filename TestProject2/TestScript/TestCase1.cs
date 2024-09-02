@@ -19,7 +19,7 @@ namespace Hiten_s_Automation_Exercise.TestScript
         public void TC1()
         {
             //fetch data from Excel
-            ExcelUtility eu = new ExcelUtility();
+            
             string name = eu.GetDataFromExcel("Excer", 2, 1);
             string email = eu.GetDataFromExcel("Excer", 2, 2);
             string password = eu.GetDataFromExcel("Excer", 2, 3);
@@ -36,8 +36,6 @@ namespace Hiten_s_Automation_Exercise.TestScript
             //3. Verify that home page is visible successfully
             string title = driver.Title;
             StringAssert.IsMatch("Automation Exercise", title);
-
-
 
             //4. Click on 'Signup / Login' button
             WelcomePage wp = new WelcomePage(driver);
@@ -103,5 +101,77 @@ namespace Hiten_s_Automation_Exercise.TestScript
             //18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
             Assert.IsTrue(ac.getAccountdeletedtext().Displayed);
         }
+
+        [Test]
+        public void TC2()
+        {
+            string email = eu.GetDataFromExcel("Excer", 2, 2);
+            string password = eu.GetDataFromExcel("Excer", 2, 3);
+
+            //3. Verify that home page is visible successfully
+            string title = driver.Title;
+            StringAssert.IsMatch("Automation Exercise", title);
+
+            //4. Click on 'Signup / Login' button
+            WelcomePage wp = new WelcomePage(driver);
+            wp.getLoginSignuplink().Click();
+
+            //5. Verify 'Login to your account' is visible
+            LoginPage lp = new LoginPage(driver);
+            Assert.IsTrue(lp.getLogintext().Displayed);
+
+            //6. Enter correct email address and password
+            lp.getLoginEmailtxt().SendKeys(email);
+            lp.getPasswordtxt().SendKeys(password);
+
+            //7. Click 'login' button
+            lp.getLoginbtn().Click();
+
+            //8. Verify that 'Logged in as username' is visible
+            HomePage hp = new HomePage(driver);
+            Assert.IsTrue(hp.getLoggedInAsText().Displayed);
+
+            //9. Click 'Delete Account' button
+            hp.getDeleteAccounttext().Click();
+
+            //10. Verify that 'ACCOUNT DELETED!' is visible
+            Account_Created ac = new Account_Created(driver);
+            Assert.IsTrue(ac.getAccountdeletedtext().Displayed);
+
+
+        }
+
+        [Test]
+        public void TC3()
+        {
+            string email = eu.GetDataFromExcel("Excer", 2, 2);
+            string password = eu.GetDataFromExcel("Excer", 2, 3);
+
+            //3. Verify that home page is visible successfully
+            string title = driver.Title;
+            StringAssert.IsMatch("Automation Exercise", title);
+
+            //4. Click on 'Signup / Login' button
+            WelcomePage wp = new WelcomePage(driver);
+            wp.getLoginSignuplink().Click();
+
+            //5. Verify 'Login to your account' is visible
+            LoginPage lp = new LoginPage(driver);
+            Assert.IsTrue(lp.getLogintext().Displayed);
+
+            //6. Enter incorrect email address and password
+            lp.getLoginEmailtxt().SendKeys(email + ".id");
+            lp.getPasswordtxt().SendKeys(password + "rr");
+
+            //7. Click 'login' button
+            lp.getLoginbtn().Click();
+
+            //8. Verify error 'Your email or password is incorrect!' is visible
+            Assert.IsTrue(lp.getIncorrectEmailPassText().Displayed);
+
+        }
+
+
+
     }
 }

@@ -16,6 +16,9 @@ namespace TestProject2.Generic_Utility.PageRepo
         [FindsBy(How =How.XPath,Using = "//a[text()=' Delete Account']")]
         private IWebElement deleteAccountLink;
 
+        [FindsBy(How =How.XPath,Using = "//a[text()=' Logged in as ']")]
+        private IWebElement loggedInAsText;
+
         public HomePage(IWebDriver driver)
         {
             PageFactory.InitElements(driver,this);
@@ -23,5 +26,6 @@ namespace TestProject2.Generic_Utility.PageRepo
 
         public IWebElement getLoggedintxt() { return logedintext;}
         public IWebElement getDeleteAccounttext() { return deleteAccountLink; }
+        public IWebElement getLoggedInAsText() { return loggedInAsText;}
     }
 }

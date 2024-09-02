@@ -34,6 +34,9 @@ namespace Hiten_s_Automation_Exercise.PageRepo
         [FindsBy(How = How.XPath,Using = "//button[text()='Signup']")]
         private IWebElement SignUpBtn;
 
+        [FindsBy(How =How.XPath,Using = "//p[text()='Your email or password is incorrect!']")]
+        private IWebElement incorrectEmailPasstext;
+
         
 
         public LoginPage(IWebDriver driver)
@@ -50,6 +53,7 @@ namespace Hiten_s_Automation_Exercise.PageRepo
         public IWebElement getSignuptext() { return Signuptext; }
 
         public IWebElement getSignupbtn() { return SignUpBtn; }
+        public IWebElement getIncorrectEmailPassText() {return incorrectEmailPasstext;}
         
         
 
