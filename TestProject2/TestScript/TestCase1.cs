@@ -1,4 +1,6 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Model;
+using DocumentFormat.OpenXml.Bibliography;
 using Hiten_s_Automation_Exercise.GenericUtility.FileUtility;
 using Hiten_s_Automation_Exercise.GenericUtility.WebDriverUtility;
 using Hiten_s_Automation_Exercise.PageRepo;
@@ -13,9 +15,6 @@ namespace Hiten_s_Automation_Exercise.TestScript
 {
     internal class TestCase1:BaseClass
     {
-
-
-
         [Test]
         public void TC1()
         {
@@ -101,11 +100,6 @@ namespace Hiten_s_Automation_Exercise.TestScript
 
             //18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
             Assert.IsTrue(ac.getAccountdeletedtext().Displayed);
-
-
-
         }
-
-
     }
 }
