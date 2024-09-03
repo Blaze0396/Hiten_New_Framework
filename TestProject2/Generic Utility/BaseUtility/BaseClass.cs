@@ -24,31 +24,27 @@ namespace TestProject2.Generic_Utility.BaseUtility
         {
             spark = new ExtentSparkReporter("E:\\VisualStudio\\TestProject2\\TestProject2\\Reports\\report.html");
             spark.Config.DocumentTitle = "report";
-            spark.Config.ReportName = "" + TestContext.CurrentContext;
+            
+            spark.Config.ReportName = TestContext.CurrentContext.Test.Name;
             reports = new ExtentReports();
             reports.AttachReporter(spark);
             reports.AddSystemInfo("OS", "Win11");
             reports.AddSystemInfo("Browser", "Chrome");
-            
         }
         [SetUp]
         public void LaunchBrowserEnterUrl()
         {
             driver = new ChromeDriver();
-            
-
-
-            //wu.LaunchBrowser(driver, "chrome");
             wu.ImplicitWait(driver);
             wu.MaximizeBrowser(driver);
             driver.Url = "https://automationexercise.com/";
+
             test = reports.CreateTest(TestContext.CurrentContext.Test.Name);
 
         }
         [TearDown]
         public void CloseBrowser()
         {
-
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 test.Log(Status.Fail, TestContext.CurrentContext.Test.Name + " Failed");
@@ -59,8 +55,6 @@ namespace TestProject2.Generic_Utility.BaseUtility
             }
             else { test.Log(Status.Pass, TestContext.CurrentContext.Test.Name + " Passed"); }
             driver.Dispose();
-            
-
         }
         [OneTimeTearDown]
         public void closeReport()

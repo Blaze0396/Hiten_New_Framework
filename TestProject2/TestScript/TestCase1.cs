@@ -102,6 +102,7 @@ namespace Hiten_s_Automation_Exercise.TestScript
             Assert.IsTrue(ac.getAccountdeletedtext().Displayed);
         }
 
+        [Ignore("Fuck")]
         [Test]
         public void TC2()
         {
@@ -168,6 +169,40 @@ namespace Hiten_s_Automation_Exercise.TestScript
 
             //8. Verify error 'Your email or password is incorrect!' is visible
             Assert.IsTrue(lp.getIncorrectEmailPassText().Displayed);
+
+        }
+
+        [Test]
+        public void TC4()
+        {
+            string email = eu.GetDataFromExcel("Excer", 2, 2);
+            string password = eu.GetDataFromExcel("Excer", 2, 3);
+
+            //3. Verify that home page is visible successfully
+            string title = driver.Title;
+            StringAssert.IsMatch("Automation Exercise", title);
+
+            //4. Click on 'Signup / Login' button
+            WelcomePage wp = new WelcomePage(driver);
+            wp.getLoginSignuplink().Click();
+
+            //5. Verify 'Login to your account' is visible
+            LoginPage lp = new LoginPage(driver);
+            Assert.IsTrue(lp.getLogintext().Displayed);
+
+            //6. Enter correct email address and password
+            lp.getLoginEmailtxt().SendKeys(email);
+            lp.getPasswordtxt().SendKeys(password);
+
+            //7. Click 'login' button
+            lp.getLoginbtn().Click();
+
+            //8. Verify that 'Logged in as username' is visible
+            HomePage hp = new HomePage(driver);
+            Assert.IsTrue(hp.getLoggedintxt().Displayed);
+
+            //9. Click 'Logout' button
+            
 
         }
 

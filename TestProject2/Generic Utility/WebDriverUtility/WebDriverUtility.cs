@@ -15,19 +15,19 @@ namespace Hiten_s_Automation_Exercise.GenericUtility.WebDriverUtility
 {
     public class WebDriverUtil
     {
-        public void LaunchBrowser(IWebDriver driver, string browserName)
-        {
-            if (string.Equals(browserName,"chrome",StringComparison.OrdinalIgnoreCase))
-            {
-                driver = new ChromeDriver();
-            }else if (string.Equals(browserName, "firefox", StringComparison.OrdinalIgnoreCase))
-            {
-                driver = new FirefoxDriver();
-            }else if (string.Equals(browserName, "egde", StringComparison.OrdinalIgnoreCase))
-            {
-                driver = new EdgeDriver();
-            }
-        }
+        //public void LaunchBrowser(IWebDriver driver, string browserName)
+        //{
+        //    if (string.Equals(browserName,"chrome",StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        driver = new ChromeDriver();
+        //    }else if (string.Equals(browserName, "firefox", StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        driver = new FirefoxDriver();
+        //    }else if (string.Equals(browserName, "egde", StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        driver = new EdgeDriver();
+        //    }
+        //}
         public void ImplicitWait(IWebDriver driver)
         {
             driver.Manage().Timeouts().ImplicitWait=TimeSpan.FromSeconds(10);
